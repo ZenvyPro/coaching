@@ -34,24 +34,13 @@
     .password-wrap {
       position: relative;
     }
-    input[type="password"],
-    input[type="text"] {
+    input[type="password"] {
       width: 100%;
       padding: 12px;
       border: 2px solid #764ba2;
       border-radius: 10px;
       font-size: 16px;
       margin-bottom: 20px;
-    }
-    .toggle-pass {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: none;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      color: #764ba2;
     }
     button {
       width: 100%;
@@ -115,7 +104,6 @@
     <h1>🔒 Enter Password</h1>
     <div class="password-wrap">
       <input type="password" id="password" placeholder="Type the password..." />
-      <button class="toggle-pass" onclick="togglePassword()">👁️</button>
     </div>
     <button onclick="checkPassword()">Unlock</button>
     <p id="error"></p>
@@ -178,11 +166,6 @@
       } else {
         error.textContent = "❌ Incorrect password. Try again.";
       }
-    }
-
-    function togglePassword() {
-      const input = document.getElementById("password");
-      input.type = input.type === "password" ? "text" : "password";
     }
   </script>
 
