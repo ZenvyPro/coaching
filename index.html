@@ -31,9 +31,6 @@
       margin-bottom: 20px;
       text-align: center;
     }
-    .password-wrap {
-      position: relative;
-    }
     input[type="password"] {
       width: 100%;
       padding: 12px;
@@ -102,24 +99,19 @@
 
   <div class="container lock-screen" id="lockScreen">
     <h1>🔒 Enter Password</h1>
-    <div class="password-wrap">
-      <input type="password" id="password" placeholder="Type the password..." />
-    </div>
+    <input type="password" id="password" placeholder="Type the password..." />
     <button onclick="checkPassword()">Unlock</button>
     <p id="error"></p>
   </div>
 
   <div class="container content" id="contentScreen">
     <h1>📚 Coaching Materials</h1>
-    <p>Click to open:</p>
-    <div class="file-list" id="fileList">
-      <!-- Files will be loaded here -->
-    </div>
+    <div class="file-list" id="fileList"></div>
   </div>
 
   <script>
-    const githubUser = "ZenvyPro"; // 🔁 replace with your GitHub username
-    const githubRepo = "coaching";     // 🔁 replace with your repo name
+    const githubUser = "ZenvyPro"; // 🔁 Replace with your GitHub username
+    const githubRepo = "coaching";     // 🔁 Replace with your GitHub repository name
 
     async function loadFiles() {
       const fileList = document.getElementById("fileList");
@@ -143,11 +135,13 @@
 
         fileList.innerHTML = "";
         data.forEach(file => {
-          const link = document.createElement("a");
-          link.href = file.download_url;
-          link.target = "_blank";
-          link.innerText = `📄 ${file.name}`;
-          fileList.appendChild(link);
+          if (file.download_url) {
+            const link = document.createElement("a");
+            link.href = file.download_url;
+            link.target = "_blank";
+            link.innerText = `📄 ${file.name}`;
+            fileList.appendChild(link);
+          }
         });
 
       } catch (err) {
