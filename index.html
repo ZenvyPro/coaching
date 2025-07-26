@@ -62,8 +62,8 @@
   </div>
 
   <script>
-    const githubUser = "ZenvyPro";
-    const githubRepo = "coaching";
+    const githubUser = "ZenvyPro"; // your username
+    const githubRepo = "coaching"; // your repo name
     const materialFolder = "materials";
     const listEl = document.getElementById("material-list");
 
@@ -71,8 +71,8 @@
       const res = await fetch(`https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${materialFolder}`);
       const files = await res.json();
 
-      if (!files || !Array.isArray(files)) {
-        listEl.innerHTML = "<p>No files found.</p>";
+      if (!Array.isArray(files)) {
+        listEl.innerHTML = "<p>No files found or GitHub Pages error.</p>";
         return;
       }
 
@@ -104,17 +104,15 @@
           viewer.src = fileUrl;
           viewer.controls = true;
         } else {
-          viewer = document.createElement("a");
-          viewer.href = fileUrl;
-          viewer.textContent = "Unsupported preview. Click to open.";
-          viewer.target = "_blank";
+          viewer = document.createElement("p");
+          viewer.textContent = "Cannot preview this file. You can download it below.";
         }
         fileItem.appendChild(viewer);
 
         const downloadBtn = document.createElement("a");
         downloadBtn.href = fileUrl;
         downloadBtn.className = "download-btn";
-        downloadBtn.setAttribute("download", file.name);
+        downloadBtn.setAttribute("target", "_blank");
         downloadBtn.textContent = "Download";
         fileItem.appendChild(downloadBtn);
 
